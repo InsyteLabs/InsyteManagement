@@ -1,0 +1,20 @@
+{
+  "name": "insyte-management",
+  "short_name": "insyte-management",
+  "icons": [
+    {
+      "src": "./img/icons/android-chrome-192x192.png.disabled",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./img/icons/android-chrome-512x512.png.disabled",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#4DBA87"
+}
