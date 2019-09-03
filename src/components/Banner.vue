@@ -159,6 +159,7 @@ export default class Banner extends Vue{
 @import '@/style/variables'
 
 #banner
+    z-index: 2
     position: relative
     display: block
     width: 100%

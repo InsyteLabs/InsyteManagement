@@ -1,8 +1,11 @@
 <template>
     <nav :class="{ hidden: !visible }" id="nav">
-
-
         <router-link to="/">HOME</router-link>
+        <router-link to="/addresses">ADDRESSES</router-link>
+        <router-link to="/contacts">CONTACTS</router-link>
+        <router-link to="/companies">COMPANIES</router-link>
+        <router-link to="/projects">PROJECTS</router-link>
+        <router-link to="/products">PRODUCTS</router-link>
     </nav>
 </template>
 
@@ -30,18 +33,20 @@ a, a:visited, a:active, a:hover
     padding: .6rem 1.2rem
     text-decoration: none
 
-    &.router-link-active
+    &.router-link-exact-active
         background-color: $purple
 
 #nav
+    z-index: 1
     position: fixed
-    height: calc(100% - 80px)
+    height: 100%
+    padding-top: 80px
     width: 250px
     background-color: $gray
     color: white
 
     left: 0
-    top: 80px
+    top: 0
 
     transition: all .2s ease-in-out
 

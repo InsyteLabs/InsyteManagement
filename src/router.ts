@@ -1,6 +1,14 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from './views/Home.vue'
+'use strict';
+
+import Vue    from 'vue';
+import Router from 'vue-router';
+
+import Home      from './views/Home.vue';
+import Addresses from './views/Addresses.vue';
+import Contacts  from './views/Contacts.vue';
+import Companies from './views/Companies.vue';
+import Projects from './views/Projects.vue';
+import Products from './views/Products.vue';
 
 Vue.use(Router)
 
@@ -12,6 +20,31 @@ export default new Router({
             path: '/',
             name: 'home',
             component: Home
+        },
+        {
+            path: '/addresses',
+            name: 'addresses',
+            component: Addresses
+        },
+        {
+            path: '/contacts',
+            name: 'contacts',
+            component: Contacts
+        },
+        {
+            path: '/companies',
+            name: 'companies',
+            component: Companies
+        },
+        {
+            path: '/projects',
+            name: 'projects',
+            component: Projects
+        },
+        {
+            path: '/products',
+            name: 'products',
+            component: Products
         },
         {
             path: '/about',

@@ -7,7 +7,7 @@
             :visible="navigationVisible">
         </Navigation>
 
-        <div class="container-fluid">
+        <div id="main" class="container-fluid" :class="{ compact: navigationVisible }">
             <router-view />
         </div>
     </div>
@@ -47,5 +47,14 @@ export default class App extends Vue{
     font-family: "Avenir", Helvetica, Arial, sans-serif
     -webkit-font-smoothing: antialiased
     -moz-osx-font-smoothing: grayscale
-    color: #2c3e50
+
+#main
+    margin: 2rem 0
+    width: 100%
+
+    transition: width .2s ease-in-out, margin .2s ease-in-out
+    
+    &.compact
+        width: calc(100% - 250px)
+        margin: 2rem 0 2rem 250px
 </style>
