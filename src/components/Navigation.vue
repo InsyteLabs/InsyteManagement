@@ -1,11 +1,11 @@
 <template>
     <nav :class="{ hidden: !visible }" id="nav">
         <router-link to="/">HOME</router-link>
-        <router-link to="/addresses">ADDRESSES</router-link>
+        <router-link to="/projects">PROJECTS</router-link>
         <router-link to="/contacts">CONTACTS</router-link>
         <router-link to="/companies">COMPANIES</router-link>
-        <router-link to="/projects">PROJECTS</router-link>
         <router-link to="/products">PRODUCTS</router-link>
+        <router-link to="/addresses">ADDRESSES</router-link>
     </nav>
 </template>
 
