@@ -1,7 +1,14 @@
 <template>
     <div @click="onModalBgClick($event);" ref="modalWindow" class="__modal-window__" :class="{ active: modalActive }">
         <div class="__modal-dialog__">
-            <span ref="modalClose" class="__modal-close__ clickable text-right mb-0">CLOSE <span class="times">&times;</span></span>
+            <div class="clearfix">
+                <span ref="modalClose" class="__modal-close__ clickable text-right mb-0">
+                    CLOSE <span class="times">&times;</span>
+                </span>
+            </div>
+            <div class="__modal-body__">
+                <slot></slot>
+            </div>
         </div>
     </div>
 </template>
@@ -14,9 +21,15 @@ import { Vue, Component, Prop, Emit, Watch } from 'vue-property-decorator';
 @Component
 export default class ModalWindow extends Vue{
 
-    modalActive: boolean = true;
+    modalActive: boolean = false;
 
-    created(): void{ }
+    created(): void{
+        document.addEventListener('keyup', this.keyupHandler);
+    }
+
+    destroyed(): void{
+        document.removeEventListener('keyup', this.keyupHandler);
+    }
 
     onModalBgClick(event: MouseEvent): void{
         const { target } = event;
@@ -30,26 +43,33 @@ export default class ModalWindow extends Vue{
     }
 
     openModal(): void{
-        this.modalActive = true;
-
-        document.body.style.filter = `blur(4px);`
-
-        this.modalActiveStateChange(true);
+        document.body.style.overflowY = 'hidden';
+        this.modalActiveStateChange(this.modalActive = true);
     }
 
     closeModal(): void{
-        this.modalActive = false;
-        this.modalActiveStateChange(false);
+        document.body.style.overflowY = 'auto';
+        this.modalActiveStateChange(this.modalActive = false);
+    }
+
+    keyupHandler(e: any): void{
+        e = e || window.event;
+
+        let escape = false;
+        if('key' in e){
+            escape = (e.key === 'Escape' || e.key === 'Esc');
+        }
+        else{
+            escape = e.keyCode === 27;
+        }
+        escape && this.closeModal();
     }
 
     @Emit('modalActiveStateChange')
     modalActiveStateChange(active: boolean): void{ }
 
     @Watch('modalActive')
-    modalActiveWatcher(active: boolean): void{
-        console.log('Modal state changed from watch')
-        console.log(`is: ${ active }`);
-    }
+    modalActiveWatcher(active: boolean): void{ }
 }
 </script>
 
@@ -66,7 +86,7 @@ export default class ModalWindow extends Vue{
     height: 100%
     overflow-y: auto
 
-    background-color: rgba($dark-gray, .75)
+    background-color: rgba($dark-gray, .9)
     
     &.active
         top: 0
@@ -75,17 +95,13 @@ export default class ModalWindow extends Vue{
         .__modal-dialog__
             opacity: 1
             margin: 100px auto
-            transition: all .35s ease .1s
+            transition: margin .3s ease .1s, opacity .375s ease .25s
 
 .__modal-dialog__
     width: 900px
     padding: 1rem
-
     margin: -100% auto
     opacity: 0
-    
-    // REMOVE
-    min-height: 500px
 
     background-color: white
 
@@ -101,5 +117,10 @@ export default class ModalWindow extends Vue{
     line-height: .2
     top: 3px
     left: 3px
+
+.clearfix::after
+    content: ''
+    display: table
+    clear: both
 
 </style>

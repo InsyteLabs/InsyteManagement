@@ -1,6 +1,9 @@
 <template>
     <div class="container-fluid">
-        <ModalWindow @modalActiveStateChange="onModalActiveStateChange($event);" ref="modalWindow"></ModalWindow>
+        <ModalWindow @modalActiveStateChange="onModalActiveStateChange($event);" ref="modalWindow">
+            <h1>Here is some dynamic content</h1>
+        </ModalWindow>
+
         <button @click="openModal" class="btn btn-primary">Open Modal</button>
     </div>
 </template>
@@ -25,7 +28,7 @@ export default class Home extends Vue {
     }
 
     onModalActiveStateChange(active: boolean): void{
-        console.log(`ModalActive: ${ active }`);
+
     }
 }
 </script>
