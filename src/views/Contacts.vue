@@ -114,7 +114,7 @@ export default class Contacts extends Vue {
     onModalActiveStateChange(active: boolean): void{
         if(!active){
             this.selectedContact = null;
-            this.newContact      = false;
+            this.newContact      = true;
         }
     }
 
