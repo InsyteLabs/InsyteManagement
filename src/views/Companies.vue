@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid">
-        <ModalWindow @modalActiveStateChange="onModalActiveStateChange($event)" ref="modalWindow">
+        <ModalWindow @modalActiveStateChange="onModalActiveStateChange($event)" :size="'large'" ref="modalWindow">
             <CompanyForm
                 :company="selectedCompany"
                 :newCompany="newCompany"

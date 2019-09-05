@@ -1,5 +1,5 @@
 <template>
-    <div @click="onModalBgClick($event);" ref="modalWindow" class="__modal-window__" :class="{ active: modalActive }">
+    <div @click="onModalBgClick($event);" ref="modalWindow" class="__modal-window__" :class="classObject">
         <div class="__modal-dialog__">
             <div class="clearfix">
                 <span ref="modalClose" class="__modal-close__ clickable text-right mb-0">
@@ -21,7 +21,19 @@ import { Vue, Component, Prop, Emit, Watch } from 'vue-property-decorator';
 @Component
 export default class ModalWindow extends Vue{
 
+    @Prop({ default: 'medium' }) size!: string;
+
     modalActive: boolean = false;
+
+    get classObject(){
+        return {
+            active:    this.modalActive,
+            'size-sm': this.size === 'small',
+            'size-md': this.size === 'medium',
+            'size-lg': this.size === 'large',
+            'size-xl': this.size === 'extra-large'
+        }
+    }
 
     created(): void{
         document.addEventListener('keyup', this.keyupHandler);
@@ -97,8 +109,19 @@ export default class ModalWindow extends Vue{
             margin: 100px auto
             transition: margin .3s ease .1s, opacity .375s ease .25s
 
+    &.size-sm .__modal-dialog__
+        width: 600px
+    &.size-md .__modal-dialog__
+        width: 900px
+    &.size-lg .__modal-dialog__
+        width: 1200px
+    &.size-xl .__modal-dialog__
+        width: 1500px
+        
+
 .__modal-dialog__
     width: 900px
+    max-width: 90%
     padding: 1rem
     margin: -100% auto
     opacity: 0
