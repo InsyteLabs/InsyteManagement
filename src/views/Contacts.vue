@@ -70,6 +70,7 @@ export default class Contacts extends Vue {
         this._loadContacts();
     }
     
+
     /*
         ==============
         EVENT HANDLERS

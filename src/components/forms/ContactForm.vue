@@ -78,14 +78,15 @@
 
 import { Vue, Component, Prop, Emit, Watch } from 'vue-property-decorator';
 
-import { IContact } from '../../interfaces';
+import { IContact } from '@/interfaces';
 
 @Component
-export default class ContactForm extends Vue {
+export default class ContactForm extends Vue{
     
     @Prop() newContact!: boolean;
     @Prop() contact!:    IContact;
 
+    // Form fields
     firstName: string = '';
     lastName:  string = '';
     email:     string = '';

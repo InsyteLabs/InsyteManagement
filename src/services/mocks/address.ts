@@ -5,7 +5,7 @@ import { IAddress } from '@/interfaces/IAddress';
 export const ADDRESSES: IAddress[] = [
     {
         id:      1,
-        name:    'First Address',
+        alias:   'First Address',
         street1: '1729 S Magnolia Ave',
         street2: '',
         city:    'Stillwater',
@@ -14,7 +14,7 @@ export const ADDRESSES: IAddress[] = [
     },
     {
         id:      2,
-        name:    'Second Address',
+        alias:   'Second Address',
         street1: '1984 S Orwell Ln',
         street2: 'Box 12',
         city:    'Perkins',
@@ -23,7 +23,7 @@ export const ADDRESSES: IAddress[] = [
     },
     {
         id:      3,
-        name:    'Third Address',
+        alias:   'Third Address',
         street1: '754 S Lumberjack Way',
         street2: '',
         city:    'Kingfisher',
@@ -32,7 +32,7 @@ export const ADDRESSES: IAddress[] = [
     },
     {
         id:      4,
-        name:    'Fourth Address',
+        alias:   'Fourth Address',
         street1: '834 S Hummingbird Rd',
         street2: 'Ste 413',
         city:    'Guthrie',
@@ -41,7 +41,7 @@ export const ADDRESSES: IAddress[] = [
     },
     {
         id:      5,
-        name:    'Fifth Address',
+        alias:   'Fifth Address',
         street1: '3847 S Port Ave',
         street2: '',
         city:    'Oklahoma City',
