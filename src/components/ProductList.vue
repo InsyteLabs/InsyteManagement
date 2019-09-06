@@ -1,28 +1,26 @@
 <template>
-    <div class="card">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Rate</th>
-                    <th>Qualifier</th>
-                    <th>Manage</th>
-                </tr>
-            </thead>
-            <tbody v-if="products && products.length">
-                <tr v-for="product of products" :key="product.id">
-                    <td>{{ product.id }}</td>
-                    <td>{{ product.name }}</td>
-                    <td>{{ product.description | truncate(100) }}</td>
-                    <td>{{ product.rate | currency }}</td>
-                    <td>{{ product.qualifier }}</td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Rate</th>
+                <th>Qualifier</th>
+                <th>Manage</th>
+            </tr>
+        </thead>
+        <tbody v-if="products && products.length">
+            <tr v-for="product of products" :key="product.id">
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.description | truncate(100) }}</td>
+                <td>{{ product.rate | currency }}</td>
+                <td>{{ product.qualifier }}</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
 </template>
 
 <script lang="ts">

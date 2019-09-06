@@ -33,7 +33,20 @@
                     <div class="input-group">
                         <select v-model="qualifier" id="qualifier" class="form-control">
                             <option value="">Select</option>
+                            <option value="Hour">Hour</option>
+                            <option value="Day">Day</option>
+                            <option value="Month">Month</option>
+                            <option value="Year">Year</option>
                         </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <!-- DESCRIPTION -->
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <div class="input-group">
+                        <textarea v-model="description" id="description" rows="4" class="form-control"></textarea>
                     </div>
                 </div>
             </div>

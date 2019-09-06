@@ -16,7 +16,7 @@
                     <h1 class="mt-5 mb-3">Companies</h1>
                 </div>
                 <div class="col-md-4 text-right">
-                    <button @click="onNewCompanyClick" class="btn bg-primary mb-2">
+                    <button @click="onNewCompanyClick()" class="btn bg-primary mb-2">
                         <span class="text-large">&plus;</span> Company
                     </button>
                     <input v-model="filter" type="text" class="form-control mb-3" placeholder="Filter Companies">
