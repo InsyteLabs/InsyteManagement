@@ -23,7 +23,8 @@
                 </div>
             </div>
             <ProductList
-                :products="products">
+                :products="products"
+                @editProduct="onEditProductClick($event)">
             </ProductList>
         </div>
     </div>
@@ -96,8 +97,19 @@ export default class Products extends Vue{
 
                 this.modalWindow.closeModal();
                 this.selectedProduct = null;
-                this.newProduct      = false;
+                this.newProduct      = true;
             });
+    }
+
+    onUpdateProduct(product: IProduct): void{
+        this.entityService.updateProduct(product)
+            .then((updatedProduct: IProduct) => {
+                this._loadProducts();
+
+                this.modalWindow.closeModal();
+                this.selectedProduct = null;
+                this.newProduct      = true;
+            })
     }
 
     onModalActiveStateChange(active: boolean): void{
