@@ -1,6 +1,7 @@
 'use strict';
 
 import { IContact } from '@/interfaces';
+import { EmailAddressType, PhoneNumberType } from '@/constants';
 
 export const CONTACTS: IContact[] = [
     {
@@ -8,59 +9,112 @@ export const CONTACTS: IContact[] = [
         firstName: 'Bryce',
         lastName:  'Jech',
         title:     'Web Developer',
-        email:     'bryce.jech@gmail.com',
-        mobile:    '405-714-0820',
-        work:      '',
-        fax:       ''
+        emails: [
+            {
+                address: 'bryce.jech@gmail.com',
+                type:    EmailAddressType.PERSONAL,
+                primary: true
+            },
+            {
+                address: 'bryce@brycejech.com',
+                type:    EmailAddressType.PERSONAL,
+                primary: false
+            }
+        ],
+        phones: [
+            {
+                number: '405-714-0820',
+                type:   PhoneNumberType.MOBILE
+            }
+        ]
     },
     {
         id:        2,
         firstName: 'Laryn',
         lastName:  'Jech',
         title:     'RN',
-        email:     'laryn_burns@yahoo.com',
-        mobile:    '405-612-6495',
-        work:      '',
-        fax:       ''
+        emails: [
+            {
+                address: 'laryn_burns@yahoo.com',
+                type:    EmailAddressType.PERSONAL,
+                primary: true
+            }
+        ],
+        phones: [
+            {
+                number: '405-612-6495',
+                type:   PhoneNumberType.MOBILE
+            }
+        ]
     },
     {
         id:        3,
         firstName: 'Wylie',
         lastName:  'Bierig',
         title:     'Student',
-        email:     'bierig.wylie@gmail.com',
-        mobile:    '',
-        work:      '',
-        fax:       ''
+        emails: [
+            {
+                address: 'bierig.wylie@gmail.com',
+                type:    EmailAddressType.PERSONAL,
+                primary: true
+            }
+        ],
+        phones: []
     },
     {
         id:        4,
         firstName: 'Kyndal',
         lastName:  'Bierig',
         title:     'Student',
-        email:     'bierig.kyndal@gmail.com',
-        mobile:    '',
-        work:      '',
-        fax:       ''
+        emails: [
+            {
+                address: 'bierig.kyndal@gmail.com',
+                type:    EmailAddressType.PERSONAL,
+                primary: true
+            }
+        ],
+        phones: []
     },
     {
         id:        5,
         firstName: 'Larry',
         lastName:  'Burns',
         title:     'Therapist',
-        email:     'larrywburnsphd@yahoo.com',
-        mobile:    '405-612-4022',
-        work:      '405-372-1988',
-        fax:       ''
+        emails: [
+            {
+                address: 'larrywburnsphd@yahoo.com',
+                type:    EmailAddressType.WORK,
+                primary: true
+            }
+        ],
+        phones: [
+            {
+                number: '405-612-6495',
+                type:   PhoneNumberType.MOBILE
+            },
+            {
+                number: '405-372-1988',
+                type:   PhoneNumberType.WORK
+            }
+        ]
     },
     {
         id:        6,
         firstName: 'Donna',
         lastName:  'Burns',
         title:     'Retired',
-        email:     'd.chuck.burns@gmail.com',
-        mobile:    '405-742-4447',
-        work:      '',
-        fax:       ''
+        emails: [
+            {
+                address: 'd.chuck.burns@yahoo.com',
+                type:    EmailAddressType.PERSONAL,
+                primary: true
+            }
+        ],
+        phones: [
+            {
+                number: '405-742-4447',
+                type:   PhoneNumberType.MOBILE
+            }
+        ]
     }
 ];
