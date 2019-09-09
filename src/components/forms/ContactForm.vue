@@ -27,11 +27,20 @@
                 </div>
             </div>
             <!-- EMAIL -->
-            <div class="col-12">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="email">Email</label>
                     <div class="input-group">
                         <input v-model="email" type="text" id="email" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <!-- TITLE -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <div class="input-group">
+                        <input v-model="title" type="text" id="title" class="form-control">
                     </div>
                 </div>
             </div>
@@ -89,6 +98,7 @@ export default class ContactForm extends Vue{
     // Form fields
     firstName: string = '';
     lastName:  string = '';
+    title:     string = '';
     email:     string = '';
     mobile:    string = '';
     work:      string = '';
@@ -98,6 +108,7 @@ export default class ContactForm extends Vue{
         const contact: IContact = {
             firstName: this.firstName,
             lastName:  this.lastName,
+            title:     this.title,
             email:     this.email,
             mobile:    this.mobile,
             work:      this.work,
@@ -145,6 +156,7 @@ export default class ContactForm extends Vue{
 
         this.firstName = this.contact.firstName;
         this.lastName  = this.contact.lastName;
+        this.title     = this.contact.title;
         this.email     = this.contact.email;
         this.mobile    = this.contact.mobile;
         this.work      = this.contact.work;
@@ -154,6 +166,7 @@ export default class ContactForm extends Vue{
     private _clearForm(): void{
         this.firstName = '';
         this.lastName  = '';
+        this.title     = '';
         this.email     = '';
         this.mobile    = '';
         this.work      = '';

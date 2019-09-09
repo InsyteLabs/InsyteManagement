@@ -4,6 +4,7 @@
             <tr>
                 <th>ID</th>
                 <th>Name</th>
+                <th>Title</th>
                 <th>Email</th>
                 <th>Mobile</th>
                 <th>Work</th>
@@ -15,6 +16,7 @@
             <tr v-for="contact of contacts" :key="contact.id">
                 <td>{{ contact.id }}</td>
                 <td>{{ contact.firstName }} {{ contact.lastName }}</td>
+                <td>{{ contact.title }}</td>
                 <td>{{ contact.email }}</td>
                 <td>{{ contact.mobile }}</td>
                 <td>{{ contact.work }}</td>
