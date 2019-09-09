@@ -1,13 +1,16 @@
 'use strict';
 
+import { IEmailAddress } from './IEmailAddress';
+import { IPhoneNumber } from './IPhoneNumber';
+
 export interface IContact{
-    [key:string]: any;
+    [key: string]: any;
+
     id?:          number;
     firstName:    string;
     lastName:     string;
     title:        string;
-    email:        string;
-    mobile:       string;
-    work:         string;
-    fax:          string;
+
+    emails:       IEmailAddress[];
+    phones:       IPhoneNumber[];
 }

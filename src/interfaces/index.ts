@@ -10,3 +10,4 @@ export { IProject }         from './IProject';
 export { IProduct }         from './IProduct';
 export { IPhoneNumber }     from './IPhoneNumber';
 export { ISocialMediaLink } from './ISocialMediaLink';
+export { IEmailAddress }    from './IEmailAddress';
