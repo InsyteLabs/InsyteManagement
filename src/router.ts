@@ -4,7 +4,6 @@ import Vue    from 'vue';
 import Router from 'vue-router';
 
 import Home      from './views/Home.vue';
-import Addresses from './views/Addresses.vue';
 import Contacts  from './views/Contacts.vue';
 import Companies from './views/Companies.vue';
 import Projects from './views/Projects.vue';
@@ -20,11 +19,6 @@ export default new Router({
             path: '/',
             name: 'home',
             component: Home
-        },
-        {
-            path: '/addresses',
-            name: 'addresses',
-            component: Addresses
         },
         {
             path: '/contacts',

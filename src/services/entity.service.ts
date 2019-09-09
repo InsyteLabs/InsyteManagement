@@ -1,68 +1,14 @@
 'use strict';
 
 import { IAddress, IContact, ICompany, IProject, IProduct }   from '@/interfaces';
-import { ADDRESSES, CONTACTS, COMPANIES, PROJECTS, PRODUCTS } from './mocks';
+import { CONTACTS, COMPANIES, PROJECTS, PRODUCTS } from './mocks';
 
 class EntityService{
 
-    private addresses: IAddress[] = ADDRESSES;
     private contacts:  IContact[] = CONTACTS;
     private companies: ICompany[] = COMPANIES;
     private projects:  IProject[] = PROJECTS;
     private products:  IProduct[] = PRODUCTS;
-
-    /*
-        ===============
-        ADDRESS METHODS
-        ===============
-    */
-    getAddresses(): Promise<IAddress[]>{
-        return new Promise((resolve, reject) => {
-            resolve(this.addresses);
-        });
-    }
-
-    getAddress(id: number): Promise<IAddress>{
-        return new Promise((resolve, reject) => {
-            resolve(this.addresses.filter(a => a.id === id)[0]);
-        });
-    }
-
-    createAddress(address: IAddress): Promise<IAddress>{
-        let lastId: number = this.addresses.reduce((acc:any, a:IAddress) => {
-            return a.id || 0 > acc ? a.id : acc;
-        }, 0);
-
-        address.id = ++lastId;
-
-        return new Promise((resolve, reject) => {
-            resolve(address);
-        });
-    }
-
-    updateAddress(address: IAddress): Promise<IAddress>{
-        const existing = this.addresses.filter(a => a.id === address.id)[0];
-
-        return new Promise((resolve, reject) => {
-            if(!existing) reject('Address does not exist');
-
-            this.addresses.splice(this.addresses.indexOf(existing), 1, address);
-
-            resolve(address);
-        });
-    }
-
-    deleteAddress(id: number): Promise<boolean>{
-        return new Promise((resolve, reject) => {
-            const existing = this.addresses.filter(a => a.id === id)[0];
-
-            if(!existing) resolve(true);
-
-            this.addresses.splice(this.addresses.indexOf(existing), 1);
-
-            resolve(true);
-        });
-    }
 
     /*
         ===============

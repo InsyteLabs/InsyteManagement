@@ -5,7 +5,6 @@
         <router-link to="/contacts">CONTACTS</router-link>
         <router-link to="/companies">COMPANIES</router-link>
         <router-link to="/products">PRODUCTS</router-link>
-        <router-link to="/addresses">ADDRESSES</router-link>
     </nav>
 </template>
 
