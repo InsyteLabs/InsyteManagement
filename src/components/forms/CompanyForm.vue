@@ -64,7 +64,7 @@
                     <tbody>
                         <tr v-for="link of socialMedia" :key="link.url">
                             <td>
-                                <a :href="link.url" target="_blank" rel="noopener nofollow">{{ link.url | truncate(30) }}</a>
+                                <a :href="link.url" target="_blank" rel="noopener nofollow">{{ link.url | truncate(45) }}</a>
                             </td>
                             <td>{{ link.type }}</td>
                             <td>
