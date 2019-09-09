@@ -3,24 +3,18 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
+                <th>First Name</th>
+                <th>Last Name</th>
                 <th>Title</th>
-                <th>Email</th>
-                <th>Mobile</th>
-                <th>Work</th>
-                <th>Fax</th>
                 <th>Manage</th>
             </tr>
         </thead>
         <tbody v-if="contacts && contacts.length">
             <tr v-for="contact of contacts" :key="contact.id">
                 <td>{{ contact.id }}</td>
-                <td>{{ contact.firstName }} {{ contact.lastName }}</td>
+                <td>{{ contact.firstName }}</td>
+                <td>{{ contact.lastName }}</td>
                 <td>{{ contact.title }}</td>
-                <td>{{ contact.email }}</td>
-                <td>{{ contact.mobile }}</td>
-                <td>{{ contact.work }}</td>
-                <td>{{ contact.fax }}</td>
                 <td>
                     <button @click="editContact(contact)" class="btn btn-sm btn-primary">
                         <svg class="btn-icon pencil" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
