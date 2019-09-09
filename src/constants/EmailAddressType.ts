@@ -1,6 +1,10 @@
 'use strict';
 
-export const EmailAddressType = {
+interface IEmailAddressType{
+    [key: string]: string
+}
+
+export const EmailAddressType: IEmailAddressType = {
     PERSONAL: 'Personal',
     WORK:     'Work',
     SUPPORT:  'Support',
