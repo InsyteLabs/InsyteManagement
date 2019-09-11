@@ -14,7 +14,16 @@ export const PROJECTS: IProject[] = [
         startDate: '09/02/2019 04:00:00',
         endDate:   '',
         hours:     0,
-        complete:  false
+        complete:  false,
+        tasks: [
+            {
+                id: 1,
+                title: 'User interface',
+                description: 'Build out application interface, collapsable navigation, list item rendering, forms and modals',
+                hours: 0,
+                entries: []
+            }
+        ]
     },
     {
         id:        2,
@@ -25,7 +34,8 @@ export const PROJECTS: IProject[] = [
         startDate: '02/19/2019 10:00:00',
         endDate:   '',
         hours:     36.75,
-        complete:  false
+        complete:  false,
+        tasks: []
     },
     {
         id:        3,
@@ -36,7 +46,8 @@ export const PROJECTS: IProject[] = [
         startDate: '02/10/2019 08:45:53',
         endDate:   '03/12/2019 21:38:39',
         hours:     16.75,
-        complete:  true
+        complete:  true,
+        tasks: []
     },
     {
         id:        4,
@@ -47,7 +58,8 @@ export const PROJECTS: IProject[] = [
         startDate: '05/02/2019',
         endDate:   '06/20/2019',
         hours:     42.5,
-        complete:  true
+        complete:  true,
+        tasks: []
     },
     {
         id:        5,
@@ -58,7 +70,8 @@ export const PROJECTS: IProject[] = [
         startDate: '08/19/2017',
         endDate:   '12/22/2017',
         hours:     128.75,
-        complete:  true
+        complete:  true,
+        tasks: []
     },
     {
         id:        6,
@@ -69,7 +82,8 @@ export const PROJECTS: IProject[] = [
         startDate: '10/20/2018',
         endDate:   '12/17/2018',
         hours:     87,
-        complete:  true
+        complete:  true,
+        tasks: []
     },
     {
         id:        7,
@@ -80,7 +94,8 @@ export const PROJECTS: IProject[] = [
         startDate: '03/20/2018',
         endDate:   '07/29/2018',
         hours:     245.25,
-        complete:  true
+        complete:  true,
+        tasks: []
     },
     {
         id:        8,
@@ -91,7 +106,8 @@ export const PROJECTS: IProject[] = [
         startDate: '07/07/2019',
         endDate:   '',
         hours:     176.5,
-        complete:  false
+        complete:  false,
+        tasks: []
     }
 ];
 

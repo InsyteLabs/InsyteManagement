@@ -1,6 +1,7 @@
 'use strict';
 
-import { ICompany } from './ICompany';
+import { ICompany }     from './ICompany';
+import { IProjectTask } from './IProjectTask';
 
 export interface IProject{
     [key: string]: any;
@@ -13,4 +14,6 @@ export interface IProject{
     endDate:       string;
     hours:         number;
     complete:      boolean;
+
+    tasks: IProjectTask[];
 }
