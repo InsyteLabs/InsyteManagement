@@ -1,6 +1,7 @@
 'use strict';
 
-import { ICompany } from '../../interfaces';
+import { ICompany, IContact } from '../../interfaces';
+import { CONTACTS }           from './contacts';
 
 import {
     PhoneNumberType as PhoneType,
@@ -15,7 +16,7 @@ export const COMPANIES: ICompany[] = [
         created:     '12/12/2018 08:00:00',
         modified:    '',
         modifiedBy:  'Bryce Jech',
-        contacts:    [],
+        contacts:    [ getContact(1) ],
         addresses: [
             {
                 id: 1,
@@ -51,7 +52,7 @@ export const COMPANIES: ICompany[] = [
         created:     '08/19/2016 12:24:08',
         modified:    '',
         modifiedBy:  'Bryce Jech',
-        contacts:    [],
+        contacts:    [ getContact(2) ],
         addresses: [
             {
                 alias: 'Main Office',
@@ -86,7 +87,7 @@ export const COMPANIES: ICompany[] = [
         created:     '05/20/2014 14:47:08',
         modified:    '',
         modifiedBy:  'Bryce Jech',
-        contacts:    [],
+        contacts:    [ getContact(3) ],
         addresses: [
             {
                 alias: 'Mailing Address',
@@ -121,7 +122,7 @@ export const COMPANIES: ICompany[] = [
         created:     '07/23/2015 07:59:37',
         modified:    '',
         modifiedBy:  'Bryce Jech',
-        contacts:    [],
+        contacts:    [ getContact(5) ],
         addresses:   [],
         phones:      [],
         socialMedia: []
@@ -133,7 +134,7 @@ export const COMPANIES: ICompany[] = [
         created:     '06/23/2016 10:04:49',
         modified:    '',
         modifiedBy:  'Bryce Jech',
-        contacts:    [],
+        contacts:    [ getContact(4) ],
         addresses:   [
             {
                 alias: 'Downtown Stillwater',
@@ -164,7 +165,7 @@ export const COMPANIES: ICompany[] = [
         created:     '07/24/2019',
         modified:    '',
         modifiedBy:  'Bryce Jech',
-        contacts:    [],
+        contacts:    [ getContact(6) ],
         addresses:   [],
         phones:      [],
         socialMedia: []
@@ -181,4 +182,8 @@ export const COMPANIES: ICompany[] = [
         phones:      [],
         socialMedia: []
     }
-]
+];
+
+function getContact(id: number): IContact{
+    return CONTACTS.filter(c => c.id === id)[0];
+}

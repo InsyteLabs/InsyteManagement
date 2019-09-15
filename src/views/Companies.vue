@@ -1,13 +1,26 @@
 <template>
     <div class="container-fluid">
-        <ModalWindow @modalActiveStateChange="onModalActiveStateChange($event)" :size="'large'" ref="modalWindow">
+        <ModalWindow @modalActiveStateChange="onModalActiveStateChange($event)" :size="'large'" ref="companyModal">
             <CompanyForm
+                ref="companyForm"
                 :company="selectedCompany"
                 :newCompany="newCompany"
 
                 @createCompany="onCreateCompany($event)"
-                @updateCompany="onUpdateCompany($event)">
+                @updateCompany="onUpdateCompany($event)"
+                @editContactClick="onEditContactClick($event)"
+                @addContactClick="onAddContactClick()">
             </CompanyForm>
+        </ModalWindow>
+
+        <ModalWindow @modalActiveStateChange="onContactModalStateChange($event)" ref="contactModal">
+            <ContactForm
+                :contact="selectedContact"
+                :newContact="newContact"
+
+                @createContact="onCreateContact($event)"
+                @updateContact="onUpdateContact($event)">
+            </ContactForm>
         </ModalWindow>
 
         <div class="card pt-3">
@@ -24,7 +37,8 @@
             </div>
             <CompanyList
                 :companies="companies"
-                @editCompany="onEditCompanyClick($event)">
+                @editCompany="onEditCompanyClick($event)"
+                @editContactClick="onEditContactClick($event)">
             </CompanyList>
         </div>
     </div>
@@ -36,21 +50,25 @@
 import { Vue, Component, Ref, Watch } from 'vue-property-decorator';
 
 import { entityService } from '@/services';
-import { ICompany }      from '@/interfaces';
+import { ICompany, IContact }      from '@/interfaces';
 
 import ModalWindow from '@/components/ModalWindow.vue';
 import CompanyList from '@/components/CompanyList.vue';
 import CompanyForm from '@/components/forms/CompanyForm.vue';
+import ContactForm from '@/components/forms/ContactForm.vue';
 
 @Component({
     components: {
         ModalWindow,
         CompanyList,
-        CompanyForm
+        CompanyForm,
+        ContactForm
     }
 })
 export default class Companies extends Vue{
-    @Ref('modalWindow') modalWindow!: ModalWindow;
+    @Ref('companyModal') companyModal!: ModalWindow;
+    @Ref('companyForm')  companyForm!:  CompanyForm;
+    @Ref('contactModal') contactModal!: ModalWindow;
 
     private entityService = entityService;
 
@@ -61,6 +79,8 @@ export default class Companies extends Vue{
     selectedCompany: ICompany | null = null;
     newCompany:      boolean         = true;
 
+    selectedContact: IContact | null = null;
+    newContact:      boolean         = false;
 
     /*
         =====
@@ -81,14 +101,14 @@ export default class Companies extends Vue{
         this.selectedCompany = null;
         this.newCompany      = true;
 
-        this.modalWindow.openModal();
+        this.companyModal.openModal();
     }
 
     onEditCompanyClick(company: ICompany): void{
         this.selectedCompany = company;
         this.newCompany      = false;
 
-        this.modalWindow.openModal();
+        this.companyModal.openModal();
     }
 
     onCreateCompany(company: ICompany): void{
@@ -96,17 +116,75 @@ export default class Companies extends Vue{
             .then((updatedCompany: ICompany) => {
                 this._loadCompanies();
 
-                this.modalWindow.closeModal();
+                this.companyModal.closeModal();
                 this.selectedCompany = null;
                 this.newCompany      = false;
             });
     }
 
+    onUpdateCompany(company: ICompany): void{
+        this.entityService.updateCompany(company)
+            .then((updatedCompany: ICompany) => {
+                this._loadCompanies();
+
+                this.selectedCompany = updatedCompany;
+                this.companyForm.init();
+            });
+    }
+
     onModalActiveStateChange(active: boolean): void{
-        if(!active){
-            this.selectedCompany = null;
-            this.newCompany      = true;
-        }
+        
+    }
+
+    onContactModalStateChange(active: boolean): void{
+
+    }
+
+    onAddContactClick(): void{
+        this.selectedContact = null;
+        this.newContact      = true;
+
+        this.companyModal.closeModal();
+        this.contactModal.openModal();
+    }
+
+    onEditContactClick(contact: IContact): void{
+        this.selectedContact = contact;
+        this.newContact      = false;
+
+        this.companyModal.closeModal();
+        this.contactModal.openModal();
+    }
+
+    onCreateContact(contact: IContact): void{
+        this.entityService.createContact(contact)
+            .then((newContact: IContact) => {
+                if(this.selectedCompany){
+                    this.selectedCompany.contacts.push(newContact);
+                }
+
+                this.contactModal.closeModal();
+                this.companyModal.openModal();
+            });
+    }
+
+    onUpdateContact(contact: IContact): void{
+        this.entityService.updateContact(contact)
+            .then((updatedContact: IContact) => {
+
+                if(this.selectedCompany && this.selectedContact){
+                    const { contacts } = this.selectedCompany;
+
+                    const idx = contacts.indexOf(this.selectedContact);
+
+                    if(~idx){
+                        contacts.splice(idx, 1, updatedContact);
+                    }
+                }
+
+                this.contactModal.closeModal();
+                this.companyModal.openModal();
+            });
     }
 
     /*
@@ -134,11 +212,15 @@ export default class Companies extends Vue{
         PRIVATE METHODS
         ===============
     */
-    private _loadCompanies(): void{
-        this.entityService.getCompanies()
-            .then((companies: ICompany[]) => {
-                this._companies = this.companies = companies;
-            });
+    private _loadCompanies(): Promise<ICompany[]>{
+        return new Promise((resolve, reject) => {
+            this.entityService.getCompanies()
+                .then((companies: ICompany[]) => {
+                    this._companies = this.companies = companies;
+
+                    resolve(companies);
+                });
+        });
     }
 }
 </script>
