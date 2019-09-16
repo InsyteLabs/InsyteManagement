@@ -1,14 +1,24 @@
 <template>
     <div class="container-fluid">
-        <ModalWindow @modalActiveStateChange="onModalActiveStateChange($event)" ref="modalWindow">
+        <ModalWindow @modalActiveStateChange="onModalActiveStateChange($event)" ref="projectModal">
             <ProjectForm
                 :project="selectedProject"
                 :newProject="newProject"
                 :companies="companies"
 
                 @createProject="onCreateProject($event)"
-                @updateProject="onUpdateProject($event)">
+                @updateProject="onUpdateProject($event)"
+                @editTask="onEditTaskClick($event)"
+                @deleteTask="onDeleteTaskClick($event)"
+                @addTask="onAddTaskClick()">
             </ProjectForm>
+        </ModalWindow>
+
+        <ModalWindow ref="taskModal">
+            <ProjectTaskForm
+                :projectTask="selectedProjectTask"
+                :newProjectTask="newProjectTask">
+            </ProjectTaskForm>
         </ModalWindow>
 
 
@@ -39,22 +49,25 @@
 import { Vue, Component, Ref, Watch } from 'vue-property-decorator';
 
 import { entityService } from '@/services';
-import { IProject, ICompany }      from '@/interfaces';
+import { IProject, ICompany, IProjectTask }      from '@/interfaces';
 
-import ModalWindow from '@/components/ModalWindow.vue';
-import ProjectList from '@/components/ProjectList.vue';
-import ProjectForm from '@/components/forms/ProjectForm.vue';
+import ModalWindow     from '@/components/ModalWindow.vue';
+import ProjectList     from '@/components/ProjectList.vue';
+import ProjectForm     from '@/components/forms/ProjectForm.vue';
+import ProjectTaskForm from '@/components/forms/ProjectTaskForm.vue';
 
 @Component({
     components: {
         ModalWindow,
         ProjectList,
-        ProjectForm
+        ProjectForm,
+        ProjectTaskForm
     }
 })
 export default class Projects extends Vue {
-    @Ref('modalWindow') modalWindow!: ModalWindow;
-    @Ref('projectList') projectList!: ProjectList;
+    @Ref('projectModal') projectModal!: ModalWindow;
+    @Ref('projectList')  projectList!:   ProjectList;
+    @Ref('taskModal')    taskModal!:     ModalWindow;
 
     private entityService = entityService;
 
@@ -65,6 +78,9 @@ export default class Projects extends Vue {
     companies:       ICompany[]      = [];
     selectedProject: IProject | null = null;
     newProject:      boolean         = true;
+
+    newProjectTask:      boolean             = false;
+    selectedProjectTask: IProjectTask | null = null;
     
     /*
         =====
@@ -86,14 +102,14 @@ export default class Projects extends Vue {
         this.selectedProject = null;
         this.newProject      = true;
 
-        this.modalWindow.openModal();
+        this.projectModal.openModal();
     }
 
     onEditProjectClick(project: IProject): void{
         this.selectedProject = project;
         this.newProject      = false;
 
-        this.modalWindow.openModal();
+        this.projectModal.openModal();
     }
 
     onCreateProject(project: IProject): void{
@@ -103,7 +119,7 @@ export default class Projects extends Vue {
 
                 // this.projectList.$forceUpdate();
 
-                this.modalWindow.closeModal();
+                this.projectModal.closeModal();
                 this.selectedProject = null;
                 this.newProject      = true;
             });
@@ -116,17 +132,29 @@ export default class Projects extends Vue {
 
                 // this.projectList.$forceUpdate();
 
-                this.modalWindow.closeModal();
+                this.projectModal.closeModal();
                 this.selectedProject = null;
                 this.newProject      = true;
             });
     }
 
     onModalActiveStateChange(active: boolean): void{
-        if(!active){
-            this.selectedProject = null;
-            this.newProject      = true;
-        }
+        // if(!active){
+        //     this.selectedProject = null;
+        //     this.newProject      = true;
+        // }
+    }
+
+    onEditTaskClick(task: IProjectTask): void{
+        this.selectedProjectTask = task;
+        this.newProjectTask      = false;
+
+        this.projectModal.closeModal();
+        this.taskModal.openModal();
+    }
+
+    onAddTaskClick(): void{
+
     }
 
 
